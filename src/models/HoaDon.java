@@ -5,11 +5,8 @@ package models;
  * and open the template in the editor.
  */
 import database.DBconnect;
-import static models.User.MsgBox;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 
 /**
@@ -56,6 +53,8 @@ public class HoaDon {
      cn.connectSQL();
      String sql = "INSERT INTO chitiethd values('"+mahd+"', '"+masp+"' ,'"+sl+"')";
      cn.UpdateData(sql);
+     String update = "UPDATE thucdon SET soluong = soluong - "+sl+" WHERE masp = '"+masp+"'";
+     cn.UpdateData(update);
     }
   
   

@@ -6,11 +6,8 @@
 package models;
 
 import database.DBconnect;
-import static models.User.MsgBox;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -67,8 +64,17 @@ public class ThucDon {
       return null;
     }
   public void InsertSanpham(String ma, int loai, String ten, long dongia, int sl) throws SQLException{ 
+      if(ten.equals(""))
+          throw new NullPointerException("name not accept null");
       cn.connectSQL();
        String sql = "INSERT INTO thucdon values('" + ma +"',"+loai+",N'" + ten +"','" + dongia + "','"+sl+"')";
+       cn.UpdateData(sql);
+    }
+  public void UpdateSanpham(String ma, int loai, String ten, long dongia, int sl) throws SQLException{ 
+      if(ten.equals(""))
+        throw new NullPointerException("name not accept null");
+      cn.connectSQL();
+       String sql = "UPDATE thucdon SET	masp = '"+ma+"', loai = "+loai+", tensp = '"+ten+"', dongia = "+dongia+" , soluong = "+sl+" WHERE masp = '"+ma+"';";
        cn.UpdateData(sql);
     }
   
@@ -79,7 +85,7 @@ public class ThucDon {
     }
   public ResultSet searchMon(String kw, String clause) throws SQLException {
      cn.connectSQL();
-      String sql = "select * from thucdon where "+kw+" LIKE '"+clause+"%'";
+      String sql = "select * from thucdon where "+kw+" LIKE '%"+clause+"%'";
       return cn.LoadData(sql);
   }
   }

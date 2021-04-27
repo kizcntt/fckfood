@@ -5,13 +5,15 @@
  */
 package fckfood;
 
-import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.User;
 
 /**
  *
@@ -22,6 +24,7 @@ public class GioHang extends javax.swing.JFrame {
     /**
      * Creates new form GioHang
      */
+    public int click=0;
     int mX;
     int mY;
     DefaultTableModel tbGiohang;
@@ -75,11 +78,6 @@ public class GioHang extends javax.swing.JFrame {
         tbGiohang.setColumnIdentifiers(spcol);
         jTbGiohang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
         jTbGiohang.setModel(tbGiohang);
-        jTbGiohang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTbGiohangMouseExited(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTbGiohang);
 
         closeBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -186,6 +184,7 @@ public class GioHang extends javax.swing.JFrame {
         mY = evt.getY();
     }//GEN-LAST:event_jLabel1MouseClicked
 
+
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         // TODO add your handling code here:
         int toadoX = evt.getXOnScreen();
@@ -196,32 +195,16 @@ public class GioHang extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         tbGiohang.removeRow(jTbGiohang.getSelectedRow());
-        MainMenu menu;   
-         try {       
-             menu = new MainMenu();
-             menu.CapNhatTien();
-            } catch (SQLException ex) {
-                Logger.getLogger(GioHang.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
+        click=1;
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTbGiohangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbGiohangMouseExited
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTbGiohangMouseExited
-
+    
     /**
      * @param args the command line arguments
      */
     public void AddGiohang(Vector dt){
            tbGiohang.addRow(dt);
         
-    }
-    
-    public DefaultTableModel getGiohang(){
-        return tbGiohang;
     }
     
     public static void main(String args[]) {
@@ -265,4 +248,5 @@ public class GioHang extends javax.swing.JFrame {
     private javax.swing.JTable jTbGiohang;
     private javax.swing.JButton minimizeBtn;
     // End of variables declaration//GEN-END:variables
+
 }
