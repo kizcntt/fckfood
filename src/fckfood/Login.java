@@ -27,7 +27,7 @@ public class Login extends javax.swing.JFrame {
     String tit;
     String name;
     int roles;
-    
+    User user = new User();
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -215,33 +215,21 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         
         int roles = 0;
-        try {
-            roles = User.checkLogin(userName.getText(), passW.getText());
-        } catch (SQLException ex) {
-            ;//Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        roles = user.checkLogin(userName.getText(), passW.getText()); 
         if(userName.getText().equals("") || passW.getText().equalsIgnoreCase(""))
             JOptionPane.showMessageDialog(this,"\n Vui lòng nhập tài khoản và mật khẩu \n\n",tit,JOptionPane.ERROR_MESSAGE);
         else if(roles!=0){
             this.setVisible(false);
-            String user = User.userInfo(userName.getText());
             MainMenu menu;
-            try {
-                menu = new MainMenu();
-                menu.setVisible(true);
-            } catch (SQLException ex) {
-                
-            }
+            menu = new MainMenu();
+            menu.setVisible(true);
             
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void userNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if (passW.getText().equals(""))
             passW.requestFocus();
-            else
-            loginBtn.doClick();
         }
     }//GEN-LAST:event_userNameKeyPressed
 
