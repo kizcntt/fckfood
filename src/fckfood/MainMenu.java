@@ -58,12 +58,12 @@ public class MainMenu extends javax.swing.JFrame {
     public DefaultTableModel tbNuoc = new DefaultTableModel();
     String []spcol = {"Mã sản phẩm","Tên món","Đơn giá","Số lượng tồn"};
     
-    public MainMenu() throws SQLException {
+    public MainMenu() {
         this.uname = User.name();
         this.uid = User.userName();
-        MonChinh();
-        MonPhu();
-        Nuoc();
+        try {
+            updateTb();
+        } catch (SQLException ex) {}
         initComponents();
         jTbChinh.getTableHeader();
     }
@@ -432,16 +432,22 @@ public class MainMenu extends javax.swing.JFrame {
 
         panelChinh.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTbChinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTbChinh.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTbChinh.setDefaultEditor(Object.class, null);
         jTbChinh.setModel(tbMonchinh);
         jTbChinh.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTbChinh.setRowHeight(40);
+        jTbChinh.setRowHeight(26);
         tbMonchinh.setColumnIdentifiers(spcol);
         jTbChinh.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTbChinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbChinhMouseClicked(evt);
+            }
+        });
 
         btnAddChinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAddChinh.setText("Thêm");
+        btnAddChinh.setEnabled(false);
         btnAddChinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddChinhActionPerformed(evt);
@@ -471,15 +477,21 @@ public class MainMenu extends javax.swing.JFrame {
 
         panelPhu.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTbPhu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTbPhu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTbChinh.setDefaultEditor(Object.class, null);
         jTbPhu.setModel(tbMonphu);
-        jTbPhu.setRowHeight(40);
+        jTbPhu.setRowHeight(26);
         tbMonphu.setColumnIdentifiers(spcol);
         jTbPhu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTbPhu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbPhuMouseClicked(evt);
+            }
+        });
 
         btnAddPhu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAddPhu.setText("Thêm");
+        btnAddPhu.setEnabled(false);
         btnAddPhu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPhuActionPerformed(evt);
@@ -509,15 +521,21 @@ public class MainMenu extends javax.swing.JFrame {
 
         panelNuoc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTbNuoc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTbNuoc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTbChinh.setDefaultEditor(Object.class, null);
         jTbNuoc.setModel(tbNuoc);
         jTbNuoc.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTbNuoc.setRowHeight(40);
+        jTbNuoc.setRowHeight(26);
         jTbNuoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTbNuoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbNuocMouseClicked(evt);
+            }
+        });
 
         btnAddNuoc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAddNuoc.setText("Thêm");
+        btnAddNuoc.setEnabled(false);
         btnAddNuoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddNuocActionPerformed(evt);
@@ -578,6 +596,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnThanhtoan.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnThanhtoan.setText("Thanh Toán");
+        btnThanhtoan.setEnabled(false);
         btnThanhtoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhtoanActionPerformed(evt);
@@ -634,7 +653,7 @@ public class MainMenu extends javax.swing.JFrame {
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -648,7 +667,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(34, 34, 34)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThanhtoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThanhtoan, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                     .addComponent(btnCapnhat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
@@ -810,12 +829,19 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
+        btnThanhtoan.setEnabled(false);
+        btnAddChinh.setEnabled(false);
+        btnAddPhu.setEnabled(false);
+        btnAddNuoc.setEnabled(false);
         int row=gh.tbGiohang.getRowCount();
         for(int i=row-1;i>=0;i--){         
         gh.tbGiohang.removeRow(i);
         }
         gh.dispose();
         SetTien(0);
+        try {
+            updateTb();
+        } catch (SQLException ex) {}
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void menuLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLogoutMouseClicked
@@ -836,6 +862,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLogoutMouseExited
 
     private void btnThanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhtoanActionPerformed
+        if(gh.click!=0)
+            btnCapnhat.doClick();
+        else{
         HoaDon hd = new HoaDon();
         int row = gh.tbGiohang.getRowCount();
         try {
@@ -846,15 +875,20 @@ public class MainMenu extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this,"\n Đã thanh toán thành công ! \n\n","Giao dịch hoàn thành",JOptionPane.INFORMATION_MESSAGE);
             btnHuy.doClick();
+            updateTb();
         }
         catch (SQLException ex) {
             //
+        }
         }
     }//GEN-LAST:event_btnThanhtoanActionPerformed
 
     private void btnCapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapnhatActionPerformed
         // TODO add your handling code here:
         CapNhatTien();
+        try {
+            updateTb();
+        } catch (SQLException ex) {}
     }//GEN-LAST:event_btnCapnhatActionPerformed
 
     private void menuLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLogoutMousePressed
@@ -862,6 +896,21 @@ public class MainMenu extends javax.swing.JFrame {
         menuLogout.setBackground(new Color(255,208,132));
     }//GEN-LAST:event_menuLogoutMousePressed
 
+    private void jTbChinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbChinhMouseClicked
+        // TODO add your handling code here:
+        btnAddChinh.setEnabled(true);
+    }//GEN-LAST:event_jTbChinhMouseClicked
+
+    private void jTbPhuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbPhuMouseClicked
+        // TODO add your handling code here:
+        btnAddPhu.setEnabled(true);
+    }//GEN-LAST:event_jTbPhuMouseClicked
+
+    private void jTbNuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbNuocMouseClicked
+        btnAddNuoc.setEnabled(true);
+    }//GEN-LAST:event_jTbNuocMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -892,16 +941,15 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new MainMenu().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new MainMenu().setVisible(true);
             }
         });
     }
-    
     public void CapNhatTien(){
+        if(gh.tbGiohang.getRowCount()!=0)
+            btnThanhtoan.setEnabled(true);
+        else
+            btnThanhtoan.setEnabled(false);
         int tien = 0;
         for(int i = 0; i<gh.tbGiohang.getRowCount();i++){
          int gia = Integer.parseInt(gh.tbGiohang.getValueAt(i, 2).toString());
@@ -948,8 +996,15 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }
     
-    
-    public void MonChinh() throws SQLException{
+    public void updateTb() throws SQLException{
+        tbMonchinh.setRowCount(0);
+        tbMonphu.setRowCount(0);
+        tbNuoc.setRowCount(0);
+        MonChinh();
+        MonPhu();
+        Nuoc();
+    }
+    protected void MonChinh() throws SQLException{
 
         ResultSet rs = sp.getMon(1);
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -970,7 +1025,7 @@ public class MainMenu extends javax.swing.JFrame {
         } 
             
 }
-    public void MonPhu() throws SQLException{
+    protected void MonPhu() throws SQLException{
         ResultSet rs = sp.getMon(2);
         ResultSetMetaData rsmd = rs.getMetaData();
         
@@ -990,7 +1045,7 @@ public class MainMenu extends javax.swing.JFrame {
         } 
             
 }
-    public void Nuoc() throws SQLException{
+    protected void Nuoc() throws SQLException{
         ResultSet rs = sp.getMon(3);
         ResultSetMetaData rsmd = rs.getMetaData();
         
@@ -1010,8 +1065,6 @@ public class MainMenu extends javax.swing.JFrame {
         } 
             
 }
-    
-   
 
     
     public class MetroLookAndFeel extends BasicButtonUI {
