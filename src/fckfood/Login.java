@@ -19,8 +19,6 @@ import javax.swing.*;
  */
 public class Login extends javax.swing.JFrame {
 
-    
-
     /**
      * Creates new form Login
      */
@@ -28,12 +26,13 @@ public class Login extends javax.swing.JFrame {
     String name;
     int roles;
     User user = new User();
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
         tit = this.getTitle();
         userName.requestFocus();
-        
+
     }
 
     /**
@@ -206,29 +205,29 @@ public class Login extends javax.swing.JFrame {
 
     private void passWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passWKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-        loginBtn.doClick();
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            loginBtn.doClick();
+
         }
     }//GEN-LAST:event_passWKeyPressed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        
+
         int roles = 0;
-        roles = user.checkLogin(userName.getText(), passW.getText()); 
-        if(userName.getText().equals("") || passW.getText().equalsIgnoreCase(""))
-            JOptionPane.showMessageDialog(this,"\n Vui lòng nhập tài khoản và mật khẩu \n\n",tit,JOptionPane.ERROR_MESSAGE);
-        else if(roles!=0){
+        roles = user.checkLogin(userName.getText(), passW.getText());
+        if (userName.getText().equals("") || passW.getText().equalsIgnoreCase(""))
+            JOptionPane.showMessageDialog(this, "\n Vui lòng nhập tài khoản và mật khẩu \n\n", tit, JOptionPane.ERROR_MESSAGE);
+        else if (roles != 0) {
             this.setVisible(false);
             MainMenu menu;
             menu = new MainMenu();
             menu.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void userNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             passW.requestFocus();
         }
     }//GEN-LAST:event_userNameKeyPressed
@@ -236,10 +235,6 @@ public class Login extends javax.swing.JFrame {
     private void minimizeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_minimizeBtnActionPerformed
-
-   
-   
-
 
     /**
      * @param args the command line arguments
@@ -272,8 +267,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-                
-                
+
             }
         });
     }

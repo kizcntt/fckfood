@@ -24,7 +24,6 @@ public class GioHang extends javax.swing.JFrame {
     /**
      * Creates new form GioHang
      */
-    public int click=0;
     int mX;
     int mY;
     DefaultTableModel tbGiohang;
@@ -77,7 +76,10 @@ public class GioHang extends javax.swing.JFrame {
 
         tbGiohang.setColumnIdentifiers(spcol);
         jTbGiohang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        jTbGiohang.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTbGiohang.setModel(tbGiohang);
+        jTbGiohang.setRowHeight(20);
+        jTbGiohang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTbGiohang);
 
         closeBtn.setBackground(new java.awt.Color(255, 51, 51));
@@ -195,7 +197,6 @@ public class GioHang extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         tbGiohang.removeRow(jTbGiohang.getSelectedRow());
-        click=1;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
