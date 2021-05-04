@@ -16,6 +16,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -848,9 +850,19 @@ public class Manager extends javax.swing.JFrame {
         jLabel17.setText("Tìm nhân viên :");
 
         txtTimNV.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTimNV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTimNVKeyTyped(evt);
+            }
+        });
 
         btnTimNV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTimNV.setText("Tìm");
+        btnTimNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimNVActionPerformed(evt);
+            }
+        });
 
         btnNhanvien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnNhanvien.setText("Hiện toàn bộ nhân viên");
@@ -1725,6 +1737,30 @@ public class Manager extends javax.swing.JFrame {
         labelDTN.setVisible(false);
         labelNgayHD.setVisible(false);
     }//GEN-LAST:event_btnHuyHDActionPerformed
+
+    private void btnTimNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimNVActionPerformed
+        try {
+            ResultSet rs = ur.searchNV("phone", txtTimNV.getText());
+            tbNhanvien.setNumRows(0);
+            while(rs.next()){
+            String rows[] = new String[6];
+            rows[0]= rs.getString(1);
+            rows[1]=rs.getString(2);
+            rows[2]=rs.getString(3);
+            rows[3]=rs.getString(4);
+            rows[4]=rs.getString(5);
+            rows[5]=rs.getString(6);
+            tbNhanvien.addRow(rows);
+            }
+        } catch (SQLException ex) {}
+    }//GEN-LAST:event_btnTimNVActionPerformed
+
+    private void txtTimNVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimNVKeyTyped
+        int len = txtTimNV.getText().length();
+        char testChar = evt.getKeyChar();
+        if (len > 11 || !(Character.isDigit(testChar)))
+            evt.consume();
+    }//GEN-LAST:event_txtTimNVKeyTyped
 
     /**
      * @param args the command line arguments
